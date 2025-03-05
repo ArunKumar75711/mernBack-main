@@ -48,7 +48,18 @@ var newSchema=new mongoose.Schema({
 
 })
 
-let Data=mongoose.model('mca',newSchema)
+let Data=mongoose.model('mca',newSchema);
+
+
+  //  UPDATE 
+    app.put('/update/:id', async (req, res) => {
+        try {
+        const updatedData = await Data.findByIdAndUpdate(req.params.id, req.body, { new: true });
+        res.send(updatedData);
+        } catch (error) {
+        res.status(500).send({ message: "Error updating data", error });
+        }
+    });
 
 
 
